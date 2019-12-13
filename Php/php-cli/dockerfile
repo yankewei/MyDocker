@@ -1,0 +1,7 @@
+FROM hyperf/hyperf
+RUN wget https://github.com/composer/composer/releases/download/1.8.6/composer.phar \
+    && mv composer.phar /usr/local/bin/composer \
+    && chmod u+x /usr/local/bin/composer \
+    && composer config -g repo.packagist composer https://mirrors.aliyun.com/composer
+COPY ./index.sh /index.sh
+CMD ["php", "/opt/www/bin/hyperf", "start"]

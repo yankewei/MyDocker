@@ -1,0 +1,5 @@
+FROM alpine:3.8
+COPY ./repositories /etc/apk/repositories
+RUN apk add --no-cache php7 php7-common php7-sockets php7-pcntl php7-event busybox-extras
+COPY ./index.sh /index.sh
+CMD ["sh", "index.sh"]

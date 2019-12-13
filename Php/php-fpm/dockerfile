@@ -1,0 +1,7 @@
+FROM php:7.3-fpm-alpine3.9
+COPY ./repositories /etc/apk/repositories
+RUN apk add --no-cache $PHPIZE_DEPS openssl-dev &&\
+    pecl install seaslog redis && \
+    docker-php-ext-enable redis seaslog
+EXPOSE 9000
+CMD ["php-fpm", "-F"]

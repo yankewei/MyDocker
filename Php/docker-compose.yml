@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+
+  # php-cli:
+  #   build:
+  #     context: ./php-cli
+  #     dockerfile: dockerfile
+  #   volumes:
+  #     - ./code/hyperf:/tmp/skeleton
+  #   networks: 
+  #     - yankewei
+  #   ports:
+  #     - "4000:4000"
+  #     - "9501:9501"
+  #   container_name: php-cli      
+
+  php-fpm:
+    build:
+      context: ./php-fpm
+      dockerfile: dockerfile
+    volumes:
+      - ./code:/Code
+    networks: 
+      - yankewei
+    container_name: php-fpm
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: dockerfile
+    volumes:
+      - ./code:/Code
+      - ./log/nginx:/var/log/nginx
+    networks: 
+      - yankewei
+    ports:
+      - "80:80"    
+    container_name: nginx   
+
+networks:
+  yankewei:
+    external: true

@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+
+  php:
+    build:
+      context: ./php
+      dockerfile: dockerfile
+    volumes:
+      - ./code:/Code
+    networks:
+      - cli
+    ports:
+      - "9501:9501"
+    container_name: php
+
+
+networks: 
+  cli:
+    external: true
